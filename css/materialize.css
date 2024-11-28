@@ -118,3 +118,35 @@
 }
 
 
+/* 追加 */
+.wordcard {
+  width: calc(100% / 3 - 30px);
+  margin: calc(30px / 2);
+  margin-right: 20px;
+  margin-bottom: 30px;
+  background-color: transparent; /* 修正 */
+}
+
+.wordcard .collapsible {
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.wordcard .collapsible-header {
+  background-color: lightblue;
+  border-radius: 16px;
+  border: none;
+}
+
+.wordcard .collapsible-body {
+  border: none;
+  background-color: lightblue;
+  border-radius: 16px;
+  padding: 15px;
+}
+
+/* アクティブ時のヘッダースタイル */
+.wordcard .collapsible-header.active {
+  border-radius: 16px 16px 0 0;
+}

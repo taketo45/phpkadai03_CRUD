@@ -125,7 +125,9 @@
     //  フローティングアクションボタンの初期化
     $('.fixed-action-btn').floatingActionButton();
     //  アコーディオン表示の初期化
-    $('.collapsible').collapsible();
+    $('.collapsible').collapsible({
+      accordion: true // 同時に1つのみ開く設定
+    });
     // //  FeatureDiscoveryの初期化
     // $('.tap-target').tapTarget();
     //ナビバーの初期化
@@ -194,6 +196,7 @@
 
   CEL.$document.on('click', '.geminibtn', function() {
     console.log('geminibtn clicked!');
+    $('#gemini #gemini-result').empty();
     geminiPrepare($(this));
   });
 
@@ -202,14 +205,34 @@
     let key = $this.attr('key');
     let englishword = $('#t-eword' + key).text();
     console.log(englishword);
+    const $resultElement = $('#gemini #gemini-result');
+    $resultElement.html('<div class="progress"><div class="indeterminate"></div></div>');
+
     // const response = await geminiquery(englishword);
     // console.log('Gemini response:', response);
     // OEL.$gemniresult.html(response.text.replace(/\n/g, '<br>'));
 
     geminiquery(englishword).then((response)=>{
-      console.log('Gemini response:', response);
-      OEL.$geminiresult.html(response.text.replace(/\n/g, '<br>'));
-    });
+      console.log('Gemini response:', response.text.replace(/\n/g, '<br>'));
+      // const $resultElement = $('#gemini #gemini-result');
+
+      if (!$resultElement.length) {
+          throw new Error('結果表示用の要素が見つかりません');
+      }
+
+      if (response.success) {
+          $resultElement.html(response.text.replace(/\n/g, '<br>'));
+          M.Modal.getInstance($('#gemini')).open();
+      } else {
+          $resultElement.html('エラーが発生しました: ' + response.error);
+      }
+      // $resultElement.html(response.text.replace(/\n/g, '<br>'));
+      // $('#gemini').modal('open');
+    }).catch(error => {
+      console.error('Error:', error);
+      $('#gemini-result').html(`<p class="red-text">エラーが発生しました: ${error.message}</p>`);
+      M.Modal.getInstance($('#gemini')).open();
+  });
 
   }
 
@@ -249,6 +272,8 @@
       const row = index;
       listitem += `
       <li class="wordcard">
+      <ul class="collapsible"> <!-- 追加 -->
+      <li> <!-- 追加 -->
         <div class="collapsible-header">
           <i class="material-icons">expand_more</i>
           <div class="c-no" id="t-no${row}">${data.id}</div>
@@ -273,19 +298,30 @@
             </label>
           </div>
           <div class="ai">
-            <a class="geminibtn waves-effect waves-light btn modal-trigger blue accent-2" key="${row}" href="#gemini"><i class="material-icons left">search</i>単語の語源</a>
+            <a class="geminibtn waves-effect waves-light btn modal-trigger blue accent-2" key="${row}" href="#gemini"><i class="material-icons left">book</i>単語の語源</a>
           </div>
         </div>
+        </li> <!-- 追加 -->
+        </ul> <!-- 追加 -->
       </li>
       `;
+      // <a class="geminibtn waves-effect waves-light btn modal-trigger blue accent-2" key="${row}" href="#gemini">
+      // 
       // if(index == Math.floor(arrData.length/2)){
       //   OEL.$leftcollapsible.append(listitem);
       //   listitem = "";
       // }
       lastnum = data.id;
+
+
     });
     // OEL.$rightcollapsible.append(listitem);
     OEL.$maincollapsible.append(listitem);
 
     IEL.$inputno.val(lastnum + 1);
+
+        // 新しく追加された要素に対してcollapsibleを初期化
+      $('.wordcard .collapsible').collapsible({
+        accordion: true
+      });
   }
