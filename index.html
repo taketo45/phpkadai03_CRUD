@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- reset.css destyle -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css" />
+    <!-- reset.css destyle -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="css/materialize.css">
+
+</head>
+<body>
+
+<nav>
+  <div class="header nav-wrapper blue accent-2">
+    <!-- <div id="header-logo-container">
+      <img id="header-logo" src="img/habatanlogo.png" alt="はば単のロゴ">
+    </div> -->
+    <a href="#!" class="brand-logo">英単語ドリル</a>
+    <ul class="right hide-on-med-and-down">
+      <!-- <li><a class="waves-effect waves-light btn modal-trigger blue accent-2" href="#newentry">新規登録</a></li> -->
+
+      <li><a class="waves-effect waves-light btn modal-trigger blue accent-2" href="#wordserch"><i class="material-icons left">search</i>単語を検索</a></li>
+
+      <li><a href="#" class='dropdown-trigger btn blue accent-2' href='#' data-target='dropdown1'><i class="material-icons right blue accent-2">view_module</i>メニュー</a>
+
+      <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!"><i class="material-icons ">view_module</i>学習</a></li>
+        <li><a href="maintenance.html"><i class="material-icons">cloud</i>管理</a></li>
+      </ul>
+
+
+    </ul>
+  </div>
+</nav>
+
+
+
+<!-- 新規登録ボタン押下→ モーダル表示される内容 -->
+  <!-- Modal Structure -->
+  <div id="newentry" class="modal">
+    <div class="modal-content">
+      <h4>単語 登録</h4>
+      <p>
+      <form>
+        <label for="input-no">No:</label>
+        <input class="input-field col s6" type="text" id="input-no" title="No" hidden>
+        <label for="englishword">英単語: </label>
+        <input class="input-field col s6" type="text" name="englishword" id="englishword">
+        <div class="input-field col s12">
+        <select name="age" id="wordclass" multiple="multiple" >
+          <option value="名">名詞</option>
+          <option value="動">動詞</option>
+          <option value="形">形容詞</option>
+          <option value="副">副詞</option>
+          <option value="前">前置詞</option>
+          <option value="接">接続詞</option>
+        </select>
+        <label for="wordclass">品詞: </label>
+        </div>
+
+        <label for="japaneseword">日本語: </label>
+        <input class="input-field col s6" type="text" name="japaneseword" id="japaneseword">
+        <label for="wordexample">用例: </label>
+        <textarea class="materialize-textarea" type="text" name="wordexample" id="wordexample"></textarea>
+        <p>
+          <label>
+            <input type="checkbox" id="iknow"/>
+            <span>知ってる</span>
+          </label>
+        </p>
+        </form>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a id="insertbutton" class="waves-effect waves-light btn-small blue accent-2"><i class="material-icons right">add_box</i>単語帳へ追加</a>
+    </div>
+
+  </div>
+
+<!-- 単語を検索ボタン押下→ モーダル表示される内容 -->
+  <!-- Modal Structure -->
+  <div id="wordserch" class="modal">
+    <div class="modal-content">
+      <h4>単語 検索</h4>
+      <p>
+      <form>
+        <!-- <label for="input-no">No:</label>
+        <input class="input-field col s6" type="text" id="input-no" title="No" disabled> -->
+        <label for="s-englishword">英単語: </label>
+        <input class="input-field col s6" type="text" name="englishword" id="s-englishword">
+        <div class="input-field col s12">
+        <select name="age" id="s-wordclass" multiple="multiple" >
+          <option value="名">名詞</option>
+          <option value="動">動詞</option>
+          <option value="形">形容詞</option>
+          <option value="副">副詞</option>
+          <option value="前">前置詞</option>
+          <option value="接">接続詞</option>
+        </select>
+        <label for="s-wordclass">品詞: </label>
+        </div>
+
+        <label for="s-japaneseword">日本語: </label>
+        <input class="input-field col s6" type="text" name="japaneseword" id="s-japaneseword">
+
+        <p>
+          <label>
+            <input type="checkbox" id="s-iknow"/>
+            <span>知ってる</span>
+          </label>
+        </p>
+        </form>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a id="serchbutton" class="waves-effect waves-light btn-small blue accent-2"><i class="material-icons right">add_box</i>単語を検索</a>
+    </div>
+
+  </div>
+
+
+  <div id="gemini" class="modal">
+    <div class="modal-content">
+      <h4>単語の語源と変遷</h4>
+      <div id="gemini-result"></div>
+    </div>
+    <div class="modal-footer">
+      <a id="closebutton" class="modal-close waves-effect waves-light btn-small blue accent-2"><i class="material-icons right">close</i>閉じる</a>
+    </div>
+  </div>
+
+<!-- トップ画面の上部の画像 -->
+<div class="parallax-container">
+  <div class="parallax"><img src="img/milkyway.jpg" alt="天の川""></div>
+</div>
+
+<div class="row">
+  <div  class="col s12">
+    <ul class="collapsible accordion-area" id="maincollapsible">
+      <!-- ここにデータが挿入される -->
+      
+    </ul>
+  </div>
+
+
+
+  <ul class="pagination center-align">
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    <li class="active blue"><a href="#!">1</a></li>
+    <li class="waves-effect"><a href="#!">2</a></li>
+    <li class="waves-effect"><a href="#!">3</a></li>
+    <li class="waves-effect"><a href="#!">4</a></li>
+    <li class="waves-effect"><a href="#!">5</a></li>
+    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+  <br>
+
+<div id="result"></div>
+
+<footer class="page-footer  blue accent-2">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">本英単語集の特長</h5>
+                <p class="grey-text text-lighten-4">・中学校の英語教科書で使用されている英単語の中から1700語を収録</p>
+                <p class="grey-text text-lighten-4">・見出し語を使った連語や慣用句、用例を提示</p>
+                <p class="grey-text text-lighten-4">・兵庫県や自分が住んでいる地域の魅力を英語で発信できる例文付き</p>
+
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="https://www2.hyogo-c.ed.jp/hpe/gimu/english/habatan">「兵庫県中学生のための英単語集」～はばたけ世界へ！『はば単』
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2024 Copyright Transform Navi
+            <a class="grey-text text-lighten-4 right" href="#!">Links</a>
+            </div>
+          </div>
+        </footer>
+
+        
+
+  <script src="js/constants.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

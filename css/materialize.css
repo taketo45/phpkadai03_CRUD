@@ -1,0 +1,120 @@
+
+.parallax-container {
+  height: 300px;
+}
+
+.t-no {
+  width: 5%;
+  text-align: center;
+}
+
+.t-eword {
+  width: 15%;
+  text-align: center;
+}
+
+.t-wc {
+  width: 10%;
+  text-align: center;
+}
+
+#th-jc {
+  width: 20%;
+}
+
+#th-we {
+  width: 30%;
+}
+
+.t-jw {
+  white-space: pre-wrap;
+  line-break:strict;
+  height: 35px;
+  /* width: 100%; */
+}
+.t-we {
+  white-space: pre-wrap;
+  line-break:strict;
+  height: 35px;
+}
+
+#th-kw {
+  width: 8%;
+  text-align: center;
+}
+
+#th-func {
+  width: 8%;
+  text-align: center;
+}
+.td-func{
+  width: 15%;
+  margin: 0 auto;
+}
+
+.ul-func {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+
+}
+
+#header-logo-container {
+  height: 64px;
+  object-fit: cover;
+}
+
+#header-logo {
+  height: 100%;
+}
+
+.brand-logo {
+  margin: 0 20px;
+}
+
+
+#maincollapsible {
+  display: flex;
+	flex-wrap: wrap;
+	padding: 10px;
+}
+
+.wordcard {
+	width: calc(100% / 3 - 30px);
+	margin: calc(30px / 2);
+	/* height: 300px; */
+	margin-right: 20px;
+	margin-bottom: 30px;
+	background-color: lightblue;
+  border-radius: 16px;
+}
+
+.collapsible-header {
+  background-color: lightblue;
+  border-radius: 16px;
+}
+
+
+.c-no {
+  margin: 0 20px 0 0;
+}
+
+.c-eword {
+  font-weight: bold;
+}
+
+.c-jw {
+  width: 100%;
+  /* white-space: pre-wrap; */
+}
+
+/* .c-we {
+
+} */
+
+.c-wc-jw {
+  display: flex;
+  justify-content: space-around;
+}
+
+
